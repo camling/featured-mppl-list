@@ -1,0 +1,28 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/index.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+.wp-admin .featured-mppl-list-wrapper .list-name-in-editor {
+  font-size: 1.5rem;
+}
+
+.wp-block-ourplugin-featured-mppl-list .hidden {
+  display: none;
+}
+.wp-block-ourplugin-featured-mppl-list .list_title {
+  font-size: 2rem;
+}
+.wp-block-ourplugin-featured-mppl-list .list_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.wp-block-ourplugin-featured-mppl-list .list_container .list_item {
+  display: flex;
+  flex-direction: column;
+  max-width: 25%;
+}
+.wp-block-ourplugin-featured-mppl-list .list_container .list_item h2 {
+  font-size: 1.5rem;
+}
+
+/*# sourceMappingURL=index.css.map*/
