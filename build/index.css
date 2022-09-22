@@ -19,7 +19,6 @@
 .wp-block-ourplugin-featured-mppl-list .list_container .list_item {
   display: flex;
   flex-direction: column;
-  max-width: 25%;
 }
 .wp-block-ourplugin-featured-mppl-list .list_container .list_item h2 {
   font-size: 1.5rem;
