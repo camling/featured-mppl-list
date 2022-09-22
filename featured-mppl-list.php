@@ -62,23 +62,6 @@ class featuredMpplList {
     ));
   }
 
-  function get_list_item_width($columns)
-  {
-    switch ($columns) {
-      case 1:
-        return "100%";
-      case 2:
-        return "50%";
-      case 3:
-        return "33%";
-        case 4:
-          return "25%";
-      default:
-        return "100%";
-    }
-  }
- 
-
 
   function renderCallback($attributes) {
     if($attributes['listId'])
@@ -89,27 +72,50 @@ class featuredMpplList {
 
       $contentBlock = '';
       $contentBlock .= '<div ' . get_block_wrapper_attributes() . '>';
-      $contentBlock .= '<h1 class="list_title">' . get_list_name($attributes["listId"]) . '</h1>';
-      $contentBlock .= '<div class="list_container">';
+        $contentBlock .= '<h1 class="list_title">' . get_list_name($attributes["listId"]) . '</h1>';
+        $contentBlock .= '<div class="list_container">';
       
       $list_api_data = get_list_data($attributes['listId']);
+
+      $temp = 0; 
+      
+      if(isset($attributes['columns']))
+      {
+        $columns = $attributes['columns'];
+      }
+      else
+      {
+        $columns = 4;
+      }
+
       for ($i=0; $i < count($list_api_data); $i++) 
       { 
-          $contentBlock .= "<div class='list_item' style='max-width:".$this->get_list_item_width($attributes['columns']).";'>";
-          $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
-          $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";
-          $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
-          $contentBlock .= "</a>";
-          $contentBlock .= "<p>".$list_api_data[$i]->item_author."</p>";
-          $contentBlock .= "<p>".$list_api_data[$i]->item_description."</p>";
-          $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_isbn."</p>";
-          $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_category."</p>";
-          $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_bib."</p>";
-          $contentBlock .= "</div>";
-      }
-      $contentBlock .= '</div>';
+          if($i % $columns == 0){
+ 
+            $contentBlock .= "<div class='row'>";
+            $temp = $i;
+          }
 
-      $contentBlock .= $attributes['columns'];
+          $contentBlock .= "<div class='list_item'>";
+            $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
+            $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";
+            $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
+            $contentBlock .= "</a>";
+            $contentBlock .= "<p>".$list_api_data[$i]->item_author."</p>";
+            $contentBlock .= "<p>".$list_api_data[$i]->item_description."</p>";
+            $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_isbn."</p>";
+            $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_category."</p>";
+            $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_bib."</p>";
+          $contentBlock .= "</div> ";
+          
+          if($i == $temp + $attributes['columns'] - 1)
+          { 
+            $contentBlock .= "</div>";
+          }
+      }
+     
+      $contentBlock .= '</div>';
+      $contentBlock .= '</div>';
 
       return $contentBlock;
 
