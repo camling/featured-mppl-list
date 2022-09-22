@@ -139,6 +139,34 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
 });
 
 function EditComponent(props) {
+  function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  function radio_button_change(e, list_name) {
+    let list_name_container = document.querySelectorAll("." + list_name);
+
+    for (let i = 0; i < list_name_container.length; i++) {
+      list_name_container[i].classList.add("hidden");
+
+      if (list_name_container[i].classList.contains(e.target.id)) {
+        list_name_container[i].classList.remove("hidden");
+      }
+    }
+
+    console.log(list_name_container);
+    console.log(list_name);
+    console.log(e);
+  }
+
   function get_lists_array(list_type) {
     async function fetchAllLists(list_type) {
       const response = await fetch(`https://mppl.org/list_system/api.php/${list_type}`);
@@ -195,11 +223,36 @@ function EditComponent(props) {
     });
   }
 
+  let list_name = makeid(5);
+
   if (props.attributes.adultListsLoaded == "loaded" && props.attributes.teenListsLoaded == "loaded" && props.attributes.youthListsLoaded == "loaded") {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "featured-mppl-list-wrapper"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "list-select-container"
+      onChange: e => radio_button_change(e, list_name)
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "radio",
+      id: "adult_list",
+      name: list_name,
+      value: "adult_list"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: "adult_list"
+    }, "Adult List"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "radio",
+      id: "teen_list",
+      name: list_name,
+      value: "teen_list"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: "teen_list"
+    }, "Teen List"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: "radio",
+      id: "youth_list",
+      name: list_name,
+      value: "youth_list"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: "youth_list"
+    }, "Youth List"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: `${list_name} adult_list list-select-container hidden`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
       onChange: e => {
         props.setAttributes({
@@ -213,7 +266,7 @@ function EditComponent(props) {
     }, "Choose an Adult list"), props.attributes.adultLists.map(function (x) {
       return makeOptions("adultlists", x);
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "list-select-container"
+      className: `${list_name} teen_list list-select-container hidden`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
       onChange: e => {
         props.setAttributes({
@@ -227,7 +280,7 @@ function EditComponent(props) {
     }, "Choose an Teen list"), props.attributes.teenLists.map(function (x) {
       return makeOptions("teenlists", x);
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "list-select-container"
+      className: `${list_name} youth_list list-select-container hidden`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
       onChange: e => {
         props.setAttributes({
