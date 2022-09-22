@@ -25,6 +25,33 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
 
 function EditComponent(props) {
 
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
+  function radio_button_change(e,list_name)
+  {
+    let list_name_container = document.querySelectorAll("."+list_name);
+    for(let i = 0; i < list_name_container.length; i++)
+    {
+      list_name_container[i].classList.add("hidden");
+      if(list_name_container[i].classList.contains(e.target.id))
+      {
+        list_name_container[i].classList.remove("hidden");
+      }
+    }
+    console.log(list_name_container);
+    console.log(list_name);
+    console.log(e);
+  }
+
   function get_lists_array(list_type)
   {
     async function fetchAllLists(list_type) 
@@ -73,12 +100,23 @@ if(props.attributes.youthLists == undefined)
   });
 }
 
+  let list_name = makeid(5);
+
   if(props.attributes.adultListsLoaded == "loaded" && props.attributes.teenListsLoaded == "loaded" && props.attributes.youthListsLoaded == "loaded") 
   {
 
     return (
       <div className="featured-mppl-list-wrapper">
-        <div className="list-select-container">
+       
+        <div onChange={(e) =>radio_button_change(e, list_name)}>
+          <input type="radio" id="adult_list" name={list_name} value="adult_list"/>
+          <label for="adult_list">Adult List</label><br />
+          <input type="radio" id="teen_list" name={list_name} value="teen_list"/>
+          <label for="teen_list">Teen List</label><br />
+          <input type="radio" id="youth_list" name={list_name} value="youth_list"/>
+          <label for="youth_list">Youth List</label><br />
+        </div>
+        <div className={`${list_name} adult_list list-select-container hidden`}>
          <select onChange={e => {
           props.setAttributes({listId: e.target.value})
         }}>
@@ -87,7 +125,7 @@ if(props.attributes.youthLists == undefined)
          </select>
         </div>
 
-        <div className="list-select-container">
+        <div className={`${list_name} teen_list list-select-container hidden`}>
          <select onChange={e => {
           props.setAttributes({listId: e.target.value})
         }}>
@@ -95,7 +133,7 @@ if(props.attributes.youthLists == undefined)
 						{ props.attributes.teenLists.map(function(x) { return makeOptions("teenlists",x); })}
          </select>
         </div>
-        <div className="list-select-container">
+        <div className={`${list_name} youth_list list-select-container hidden`}>
          <select onChange={e => {
           props.setAttributes({listId: e.target.value})
         }}>
