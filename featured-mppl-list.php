@@ -78,6 +78,14 @@ class featuredMpplList {
       $list_api_data = get_list_data($attributes['listId']);
 
       $temp = 0; 
+
+      if(isset($attributes['backgroundColor']))
+      {
+        $backgroundColor = $attributes['backgroundColor'];
+      }
+      else{
+        $backgroundColor = "inherit";
+      }
       
       if(isset($attributes['columns']))
       {
@@ -96,7 +104,7 @@ class featuredMpplList {
             $temp = $i;
           }
 
-          $contentBlock .= "<div class='list_item'>";
+          $contentBlock .= "<div class='list_item' style='background-color:".$backgroundColor."'>";
             $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
             $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";
             $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
