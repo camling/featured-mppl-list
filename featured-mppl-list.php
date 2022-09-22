@@ -62,6 +62,23 @@ class featuredMpplList {
     ));
   }
 
+  function get_list_item_width($columns)
+  {
+    switch ($columns) {
+      case 1:
+        return "100%";
+      case 2:
+        return "50%";
+      case 3:
+        return "33%";
+        case 4:
+          return "25%";
+      default:
+        return "100%";
+    }
+  }
+ 
+
 
   function renderCallback($attributes) {
     if($attributes['listId'])
@@ -78,7 +95,7 @@ class featuredMpplList {
       $list_api_data = get_list_data($attributes['listId']);
       for ($i=0; $i < count($list_api_data); $i++) 
       { 
-          $contentBlock .= "<div class='list_item'>";
+          $contentBlock .= "<div class='list_item' style='max-width:".$this->get_list_item_width($attributes['columns']).";'>";
           $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
           $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";
           $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
@@ -91,6 +108,8 @@ class featuredMpplList {
           $contentBlock .= "</div>";
       }
       $contentBlock .= '</div>';
+
+      $contentBlock .= $attributes['columns'];
 
       return $contentBlock;
 

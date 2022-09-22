@@ -1,4 +1,6 @@
 import "./index.scss";
+import {InspectorControls} from "@wordpress/block-editor";
+import {PanelBody, PanelRow, ColorPicker, RangeControl} from "@wordpress/components";
 
 wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
   title: "Featured MPPL List",
@@ -13,6 +15,9 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
     teenLists : {type: "array"},
     youthListsLoaded : {type: "string"},
     youthLists : {type: "array"},
+    backgroundColor : {type : "string", default: "#FFFFFF"},
+    columns : {type: "number", default: 4}
+
 
   },
   edit: EditComponent,
@@ -106,8 +111,19 @@ if(props.attributes.youthLists == undefined)
   {
 
     return (
-      <div className="featured-mppl-list-wrapper">
-       
+      <div className="featured-mppl-list-wrapper" style={{backgroundColor: props.attributes.backgroundColor}}>
+       <InspectorControls>
+       <PanelBody title="Columns" initialOpen={true}>
+       <PanelRow>
+            <RangeControl label="Choose number of columns" value={props.attributes.columns} onChange={( numOfCol )=> props.setAttributes({columns: numOfCol})}  min={1} max={4} />
+          </PanelRow>
+        </PanelBody>
+       <PanelBody title="Background Color" initialOpen={true}>
+       <PanelRow>
+            <ColorPicker color={props.attributes.backgroundColor} onChangeComplete={(color)=> props.setAttributes({backgroundColor: color.hex})}/>
+          </PanelRow>
+        </PanelBody>
+       </InspectorControls>
         <div onChange={(e) =>radio_button_change(e, list_name)}>
           <input type="radio" id="adult_list" name={list_name} value="adult_list"/>
           <label for="adult_list">Adult List</label><br />
