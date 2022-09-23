@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "ourplugin/featured-mppl-list",
+	"version": "1.1.0",
+	"title": "Featured MPPL List",
+	"category": "common",
+	"icon": "welcome-learn-more",
+	"description": "Include a list from our lists and suggestions system",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "ourplugin",
+	"editorScript": "file:./index.js",
+	"viewScript": "file:./frontend.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
