@@ -29,13 +29,17 @@
   border: none;
   flex: 1;
   margin: 15px;
-  max-width: 300px;
 }
 .wp-block-ourplugin-featured-mppl-list .list_container .row .list_item h2 {
   font-size: 1.5rem;
 }
 .wp-block-ourplugin-featured-mppl-list .list_container .row .list_item img {
   width: 100%;
+  max-width: 300px;
+}
+.wp-block-ourplugin-featured-mppl-list .list_container .row .list_item .more_description, .wp-block-ourplugin-featured-mppl-list .list_container .row .list_item .less_description {
+  cursor: pointer;
+  color: #7796c2;
 }
 
 @media only screen and (max-width: 600px) {
