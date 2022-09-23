@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Featured MPPL List Block
-  Version: 1.0
+  Version: 1.1.0
   Author: Chris Amling
   Author URI: https://christopheramling.com
 */
