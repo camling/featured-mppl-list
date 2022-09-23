@@ -1,6 +1,6 @@
 {
   "name": "featured-mppl-list",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,8 @@
     "plugin-zip": "wp-scripts plugin-zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["MPPL","Lists","Mount Prospect Public Library"],
+  "author": "Chris Amling",
   "license": "ISC",
   "dependencies": {
     "@wordpress/scripts": "^24.1.0"
