@@ -53,12 +53,14 @@ class featuredMpplList {
 
   function onInit() {
     wp_register_script('featuredMpplListScript', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-i18n', 'wp-editor'));
+    wp_register_script('featuredMpplListScriptFrontend', plugin_dir_url(__FILE__) . 'build/frontend.js');
     wp_register_style('featuredMpplListStyle', plugin_dir_url(__FILE__) . 'build/index.css');
 
     register_block_type('ourplugin/featured-mppl-list', array(
       'render_callback' => [$this, 'renderCallback'],
       'editor_script' => 'featuredMpplListScript',
-      'editor_style' => 'featuredMpplListStyle'
+      'editor_style' => 'featuredMpplListStyle',
+      'view_script' => 'featuredMpplListScriptFrontend'
     ));
   }
 
@@ -68,6 +70,7 @@ class featuredMpplList {
     {
 
       wp_enqueue_style('featuredMpplListStyle');
+      wp_enqueue_script( 'featuredMpplListScriptFrontend');
 
 
       $contentBlock = '';
@@ -119,7 +122,13 @@ class featuredMpplList {
             $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
             $contentBlock .= "</a>";
             $contentBlock .= "<p>".$list_api_data[$i]->item_author."</p>";
-            $contentBlock .= "<p>".$list_api_data[$i]->item_description."</p>";
+
+
+            $contentBlock .=  "<p class='description' itemprop='description'>" . substr(htmlspecialchars($list_api_data[$i]->item_description, ENT_QUOTES), 0, 100). "... <span class='more_description'>More</span>" . "</p>";
+            $contentBlock .= "<p class='full_description hidden'>" .htmlspecialchars($list_api_data[$i]->item_description, ENT_QUOTES) . " <span class='less_description'>Less</span> </p>";
+
+
+            // $contentBlock .= "<p>".$list_api_data[$i]->item_description."</p>";
             $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_isbn."</p>";
             $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_category."</p>";
             $contentBlock .= "<p class='hidden'>".$list_api_data[$i]->item_bib."</p>";
@@ -147,3 +156,5 @@ class featuredMpplList {
 }
 
 $featuredMpplList = new featuredMpplList();
+
+?>
