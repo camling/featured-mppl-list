@@ -16,7 +16,8 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
     youthListsLoaded : {type: "string"},
     youthLists : {type: "array"},
     backgroundColor : {type : "string", default: "#FFFFFF"},
-    columns : {type: "number", default: 4}
+    columns : {type: "number", default: 4},
+    displayCount : {type: "number", default: 0}
 
 
   },
@@ -113,12 +114,17 @@ if(props.attributes.youthLists == undefined)
     return (
       <div className="featured-mppl-list-wrapper" style={{backgroundColor: props.attributes.backgroundColor}}>
        <InspectorControls>
+       <PanelBody title="Item Display Count" initialOpen={false}>
+       <PanelRow>
+            <RangeControl label="limit the number of list items shown. 0 is for all" value={props.attributes.displayCount} onChange={( numbOfItems )=> props.setAttributes({displayCount: numbOfItems})}  min={0} max={30} />
+          </PanelRow>
+        </PanelBody>
        <PanelBody title="Columns" initialOpen={true}>
        <PanelRow>
             <RangeControl label="Choose number of columns" value={props.attributes.columns} onChange={( numOfCol )=> props.setAttributes({columns: numOfCol})}  min={1} max={4} />
           </PanelRow>
         </PanelBody>
-       <PanelBody title="Background Color" initialOpen={true}>
+       <PanelBody title="Background Color" initialOpen={false}>
        <PanelRow>
             <ColorPicker color={props.attributes.backgroundColor} onChangeComplete={(color)=> props.setAttributes({backgroundColor: color.hex})}/>
           </PanelRow>
