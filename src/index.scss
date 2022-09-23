@@ -38,7 +38,7 @@
       border: none;
       flex: 1;
       margin:15px;
-      max-width: 300px;
+     
 
       h2{
         font-size: 1.5rem;
@@ -46,7 +46,13 @@
 
       img{
         width: 100%;
+        max-width: 300px;
       }
+
+      .more_description, .less_description {
+        cursor: pointer;
+        color: #7796c2;
+    }
     }
   }}
 }
