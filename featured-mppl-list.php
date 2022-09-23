@@ -96,7 +96,16 @@ class featuredMpplList {
         $columns = 4;
       }
 
-      for ($i=0; $i < count($list_api_data); $i++) 
+      if(isset($attributes['displayCount']) && $attributes['displayCount'] > 0)
+      {
+        $displayCount = $attributes['displayCount'];
+      }
+      else
+      {
+        $displayCount = count($list_api_data);
+      }
+
+      for ($i=0; $i < $displayCount; $i++) 
       { 
           if($i % $columns == 0){
  
