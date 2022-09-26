@@ -117,9 +117,11 @@ class featuredMpplList {
           }
 
           $contentBlock .= "<div class='list_item' style='background-color:".$backgroundColor."'>";
-            $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
+            $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";  
+              $contentBlock .= "<img src=".$list_api_data[$i]->item_image."/>";
+            $contentBlock .= "</a>";  
             $contentBlock .= "<a href='".$list_api_data[$i]->item_link."'>";
-            $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
+              $contentBlock .= "<h2>".$list_api_data[$i]->item_title."</h2>";
             $contentBlock .= "</a>";
             $contentBlock .= "<p>".$list_api_data[$i]->item_author."</p>";
 
