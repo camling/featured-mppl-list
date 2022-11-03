@@ -75,7 +75,11 @@ class featuredMpplList {
 
       $contentBlock = '';
       $contentBlock .= '<div ' . get_block_wrapper_attributes() . '>';
+      if(!isset($attributes['showTitle']))
+      {
         $contentBlock .= '<h1 class="list_title">' . get_list_name($attributes["listId"]) . '</h1>';
+      }
+        
         $contentBlock .= '<div class="list_container">';
       
       $list_api_data = get_list_data($attributes['listId']);
