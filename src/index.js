@@ -1,6 +1,6 @@
 import "./index.scss";
 import {InspectorControls} from "@wordpress/block-editor";
-import {PanelBody, PanelRow, ColorPicker, RangeControl} from "@wordpress/components";
+import {PanelBody, PanelRow, ColorPicker, RangeControl, ToggleControl} from "@wordpress/components";
 
 wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
   title: "Featured MPPL List",
@@ -17,7 +17,8 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
     youthLists : {type: "array"},
     backgroundColor : {type : "string", default: "#FFFFFF"},
     columns : {type: "number", default: 4},
-    displayCount : {type: "number", default: 0}
+    displayCount : {type: "number", default: 0},
+    showTitle : {type: "boolean", default: true}
 
 
   },
@@ -107,6 +108,7 @@ if(props.attributes.youthLists == undefined)
 }
 
   let list_name = makeid(5);
+  let show = props.attributes.showTitle;
 
   if(props.attributes.adultListsLoaded == "loaded" && props.attributes.teenListsLoaded == "loaded" && props.attributes.youthListsLoaded == "loaded") 
   {
@@ -127,7 +129,20 @@ if(props.attributes.youthLists == undefined)
        <PanelBody title="Background Color" initialOpen={false}>
        <PanelRow>
             <ColorPicker color={props.attributes.backgroundColor} onChangeComplete={(color)=> props.setAttributes({backgroundColor: color.hex})}/>
-          </PanelRow>
+        </PanelRow>
+        </PanelBody>
+        <PanelBody title="Show Title" initialOpen={false}>
+       <PanelRow>
+       <ToggleControl
+          label="Should Title be shown?"
+          help={show ? "Yes" : "No"}
+					checked={show}
+          onChange={(show) => {
+            console.log(show); 
+            show ? false : true
+            props.setAttributes({ showTitle: show })}}
+          />
+        </PanelRow>
         </PanelBody>
        </InspectorControls>
         <div onChange={(e) =>radio_button_change(e, list_name)}>

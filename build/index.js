@@ -168,6 +168,10 @@ wp.blocks.registerBlockType("ourplugin/featured-mppl-list", {
     displayCount: {
       type: "number",
       default: 0
+    },
+    showTitle: {
+      type: "boolean",
+      default: true
     }
   },
   edit: EditComponent,
@@ -262,6 +266,7 @@ function EditComponent(props) {
   }
 
   let list_name = makeid(5);
+  let show = props.attributes.showTitle;
 
   if (props.attributes.adultListsLoaded == "loaded" && props.attributes.teenListsLoaded == "loaded" && props.attributes.youthListsLoaded == "loaded") {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -299,6 +304,20 @@ function EditComponent(props) {
       onChangeComplete: color => props.setAttributes({
         backgroundColor: color.hex
       })
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      title: "Show Title",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+      label: "Should Title be shown?",
+      help: show ? "Yes" : "No",
+      checked: show,
+      onChange: show => {
+        console.log(show);
+        show ? false : true;
+        props.setAttributes({
+          showTitle: show
+        });
+      }
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       onChange: e => radio_button_change(e, list_name)
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
